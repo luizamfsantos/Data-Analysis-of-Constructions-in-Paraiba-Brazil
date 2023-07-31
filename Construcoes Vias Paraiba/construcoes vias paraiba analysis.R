@@ -18,20 +18,20 @@ Sys.setlocale(locale = "pt_PT.UTF-8")
 construcoes_pb$Inicio <- dmy(paste("1 ",construcoes_pb$Inicio))
 construcoes_pb$Conclusao <- dmy(paste("1 ",construcoes_pb$Conclusao))
 
-
-# Tipos de estagios: 
-unique(construcoes_pb$Estagio) # "Concluída"    "Em execução"  "Em projeto"   "Em licitação" "A iniciar"  
+### I noticed Extensao was supposed to be in km but was in dm 
+construcoes_pb$`Extensao(km)` <- construcoes_pb$`Extensao(km)`/100
 
 
 ### Data Exploration
+# Tipos de estagios: 
+unique(construcoes_pb$Estagio) # "Concluída"    "Em execução"  "Em projeto"   "Em licitação" "A iniciar"  
+
 # Focar nos que ainda vao aumentar o preco em execucao
 em_execucao <- construcoes_pb[construcoes_pb$Estagio=='Em execução',]
 em_execucao <- em_execucao[,-c(3,5,9,10)]
 
-sum(is.na(em_execucao))
+
 
 
 str(em_execucao)
-
-dmy("1 Set 2022")
 
