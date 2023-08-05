@@ -2,6 +2,7 @@
 library(readr)
 library(lubridate)
 library(dplyr)
+library(ggplot2)
 
 construcoes_pb <- read_csv("~/Documents/Projects/Construções Paraiba/Data-Analysis-of-Constructions-in-Paraiba-Brazil/Data/construcoes_pb.csv")
 
@@ -36,6 +37,7 @@ construcoes_pb$`Valor Medido` <- gsub("\\.","",construcoes_pb$`Valor Medido`) #i
 construcoes_pb$`Valor Medido` <- gsub("\\,","\\.",construcoes_pb$`Valor Medido`)
 construcoes_pb$`Valor Medido` <- as.numeric(construcoes_pb$`Valor Medido`)
 
+View(construcoes_pb)
 
 ############################## Data Exploration ###################################
 # Tipos de estagios: 
@@ -44,8 +46,11 @@ unique(construcoes_pb$Estagio) # "Concluída"    "Em execução"  "Em projeto"  
 # Focar nos que ainda vao aumentar o preco em execucao
 em_execucao <- construcoes_pb[construcoes_pb$Estagio=='Em execução',]
 em_execucao <- em_execucao[,-c(3,5,9,10)]
-
 View(em_execucao)
 
+# Visualizar os que ja foram concluidas
+concluidas <- construcoes_pb[construcoes_pb$Estagio=='Concluída',]
+concluidas <- concluidas[,-c(3,5,9,10)]
+View(concluidas)
 
-str(em_execucao)
+
