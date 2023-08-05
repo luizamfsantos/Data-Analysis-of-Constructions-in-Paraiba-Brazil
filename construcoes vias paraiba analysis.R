@@ -74,20 +74,29 @@ theme_set(theme_bw())
 concluidas %>% 
   mutate(.,Valor = Valor/1000000) %>%
   ggplot(aes(x = `Extensao(km)`, y = Valor)) +
-  geom_point() + 
+  geom_point(aes(col=`Fonte de Recursos`)) + 
   labs(subtitle="", 
        y="Custo em Milhões", 
        x="Extensão da Construção em Kilometros", 
-       title="Construções Concluídas em Rodovias na Paraiba Durante o Period 2019 a 2023", 
+       title="Construções Concluídas em Rodovias na Paraiba \n Durante o Periodo 2019 a 2023", 
        caption="Source: SIDA-DER/PB")
 
 concluidas %>%
   mutate(.,Valor = Valor/1000000) %>%
   ggplot(aes(x=Conclusao,y=Valor)) +
-  geom_point() + 
+  geom_point(aes(col=`Fonte de Recursos`, size = `Extensao(km)`)) + 
   labs(subtitle="", 
        y="Custo em Milhões", 
        x="Conclusão", 
-       title="Construções Concluídas em Rodovias na Paraiba Durante o Period 2019 a 2023", 
+       title="Construções Concluídas em Rodovias na Paraiba \n Durante o Periodo 2019 a 2023", 
        caption="Source: SIDA-DER/PB")
 
+concluidas %>%
+  mutate(.,Valor = Valor/1000000) %>%
+  ggplot(aes(x=Conclusao,y=Valor)) +
+  geom_point(aes(col=Empresa, size = `Extensao(km)`)) + 
+  labs(subtitle="", 
+       y="Custo em Milhões", 
+       x="Conclusão", 
+       title="Construções Concluídas em Rodovias na Paraiba \n Durante o Periodo 2019 a 2023", 
+       caption="Source: SIDA-DER/PB")
