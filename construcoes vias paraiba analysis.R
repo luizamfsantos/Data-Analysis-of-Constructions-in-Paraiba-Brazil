@@ -66,16 +66,28 @@ View(concluidas)
 
 # Time Frame of concluidas
 min(concluidas$Inicio, na.rm = TRUE) # 2018-03-01
+max(concluidas$Inicio, na.rm = TRUE) # 2022-04-01
+min(concluidas$Conclusao,na.rm = TRUE) # 2019-08-01
 max(concluidas$Conclusao,na.rm = TRUE) # 2023-01-01
 
-theme_classic()
+theme_set(theme_bw())
 concluidas %>% 
   mutate(.,Valor = Valor/1000000) %>%
   ggplot(aes(x = `Extensao(km)`, y = Valor)) +
   geom_point() + 
   labs(subtitle="", 
-       y="Valor em Milhões", 
-       x="Extensão em Kilometros", 
-       title="Construções na Paraiba Durante o Period 2018 a 2023", 
-       caption="Source: midwest")
+       y="Custo em Milhões", 
+       x="Extensão da Construção em Kilometros", 
+       title="Construções Concluídas em Rodovias na Paraiba Durante o Period 2019 a 2023", 
+       caption="Source: SIDA-DER/PB")
+
+concluidas %>%
+  mutate(.,Valor = Valor/1000000) %>%
+  ggplot(aes(x=Conclusao,y=Valor)) +
+  geom_point() + 
+  labs(subtitle="", 
+       y="Custo em Milhões", 
+       x="Conclusão", 
+       title="Construções Concluídas em Rodovias na Paraiba Durante o Period 2019 a 2023", 
+       caption="Source: SIDA-DER/PB")
 
